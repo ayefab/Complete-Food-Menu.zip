@@ -1,0 +1,249 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+
+class Menu{
+public:
+    void setName(string n);  //set name to n
+    void setPrice(int c,int p); //set price to p*q
+    void setCount(int c);   //set count to c
+    string getName()const;  //return name
+    int getPrice() const;  //return price
+    int getCount() const;  //return count
+
+   
+private:
+    string name;  //name of the food
+    int price;    //price of the food
+    int count;    //count of the food
+};
+
+void Menu::setName(string n){
+   name =n;
+}
+void Menu::setPrice(int c, int p){
+   price = p * c;
+}
+void Menu::setCount(int c){
+   count = c ;
+}
+
+string Menu::getName()const{
+    return name;
+}
+int Menu::getPrice()const{
+    return price;
+}
+int Menu::getCount()const{
+    return count;
+}
+
+
+int main(){
+
+    //double numbersSize, indexSmallest, numbers;
+    vector<Menu> myMenuList;
+    vector<int> numbers;
+    Menu currMenu;
+    string name;
+    int i, j;
+    int totalprice = 0;
+    string drink;
+    string dessert;
+    int sauce;
+    int min,max;
+    //int temp;
+    int choice;
+    int foodcount;
+    int drinkcount;
+    int dessertcount;
+    bool order = true;
+    double a = 3, b = 2, c = 2, d = 1, e = 1, f = 2,g = 2,h = 2;
+
+//if order is true then it displays menu
+while (order == true){
+ cout << "***WELCOME***";
+    cout << endl;
+    cout <<"  FOOD:         PRICE:" << endl;
+    cout <<"  Burger -------$"<< a <<endl;
+    cout <<"  Pizza --------$"<< b <<endl;
+    cout <<"  Sandwich------$"<< c <<endl;
+    cout << endl;
+    cout <<"  DRINKS:       PRICE:"<<endl;
+    cout <<"  Water---------$" << d << endl;
+    cout <<"  Soda----------$"<< e <<endl;
+    cout <<"  Juice---------$"<< f <<endl;
+    cout <<endl;
+    cout <<"  DESSERT:      PRICE:"<<endl;
+    cout <<"  Ice-Cream-----$"<< g <<endl;
+    cout <<"  Cake----------$"<< h <<endl;
+    order = false;
+}
+
+//asks user for name and quantity of food
+cout << endl;
+cout <<"Please enter the name of food you want: "<< endl;
+cin >> name;
+
+cout <<"Please enter the quantity: "<< endl;
+cin >> foodcount;
+
+
+
+ //if food name matches either with cap 1st letter or small cap then its added/appends to Menu vector
+    if (name == "Burger" || "burger"){
+      currMenu.setName(name);
+      currMenu.setPrice(a,foodcount);
+      currMenu.setCount(foodcount);
+      myMenuList.push_back(currMenu);
+    }
+    else if(name == "Pizza" || "pizza"){
+      currMenu.setName(name);
+      currMenu.setPrice(b,foodcount);
+      currMenu.setCount(foodcount);
+      myMenuList.push_back(currMenu);
+    }
+    else if(name == "Sandwich" || "sandwich"){
+      currMenu.setName(name);
+      currMenu.setPrice(c,foodcount);
+      currMenu.setCount(foodcount);
+      myMenuList.push_back(currMenu);
+    }
+    
+    //asks user for name and quantity of drink
+    cout << endl;
+    cout <<"Please enter the drink you want: "<< endl;
+    cin >> drink;
+
+    cout <<"Please enter the quantity: "<< endl;
+    cin >> drinkcount;
+    
+    //if drink name matches either with cap 1st letter or small cap then its added to Menu vector
+    if(drink == "Water" || "water"){
+       currMenu.setName(drink);
+      currMenu.setPrice(d,drinkcount);
+      currMenu.setCount(drinkcount);
+      myMenuList.push_back(currMenu);
+    }
+    else if(drink == "Soda" || "soda"){
+       currMenu.setName(drink);
+      currMenu.setPrice(e,drinkcount);
+      currMenu.setCount(drinkcount);
+      myMenuList.push_back(currMenu);
+    }
+    else if(drink == "Juice" || "juice"){
+       currMenu.setName(drink);
+      currMenu.setPrice(f,drinkcount);
+      currMenu.setCount(drinkcount);
+      myMenuList.push_back(currMenu);
+    }
+
+   //asks for name and quantity of dessert
+    cout << endl;
+    cout <<"Please enter the dessert you want: "<< endl;
+    cin >> dessert;
+
+    cout <<"Please enter the quantity: "<< endl;
+    cin >> dessertcount;
+    
+    //if dessert name matches either with cap 1st letter or small cap then its added to Menu vector
+     if(dessert == "Ice-Cream" || "ice-cream"){
+      currMenu.setName(dessert);
+      currMenu.setPrice(g,dessertcount);
+      currMenu.setCount(dessertcount);
+      myMenuList.push_back(currMenu);
+     }
+
+     else if(dessert == "Cake" || "cake"){
+     currMenu.setName(dessert);
+      currMenu.setPrice(h,dessertcount);
+      currMenu.setCount(dessertcount);
+      myMenuList.push_back(currMenu);
+    }
+   
+   // user press "0" can insert sauce at position 1 in vector. price is $0 and quantity is "1" else nothing happens
+    cout << endl;
+     cout <<"Press '0' to decline or '1' to add sauce "<< endl;
+     cin >> sauce;
+
+     if (sauce == 1){
+      currMenu.setName("sauce");
+      currMenu.setPrice(i,0);
+      currMenu.setCount(1);
+     
+      myMenuList.insert(myMenuList.begin()+1,1,currMenu);
+      }else{}
+  
+
+   //user can either continue or cancel the last item
+     cout << endl;
+     cout <<"Press '0' to cancel last item or '1' to continue "<< endl;
+     cin >> choice;
+    
+     
+     if (choice == 0){
+
+       //it deletes the last object from vector and gives all quantity of the food and prices 
+        myMenuList.pop_back();
+        cout << endl;
+        cout << "Your Order :"<<endl;
+        for (auto x: myMenuList){ 
+          int currentPrice;
+        cout  << x.getCount() <<" " << x.getName() <<  " , Price: $" << x.getPrice() << endl;
+       
+       //calculate total price
+        currentPrice = x.getPrice(); 
+       totalprice = totalprice + currentPrice;
+         }
+           
+     }else if(choice == 1){
+      
+     
+       //if press 1 gives  all quantity of the food and prices  
+        cout << endl;
+        cout<< "Your Order :"<<endl;
+        for (auto x: myMenuList){ 
+          int currentPrice;
+        cout  << x.getCount() <<" " << x.getName() <<  " , Price: $" << x.getPrice() << endl;
+
+       //calculate total price
+        currentPrice = x.getPrice(); 
+       totalprice = totalprice + currentPrice;
+         }
+              cout << endl;
+         
+     }
+     cout << endl;
+     // gives the users total price
+      cout  <<  "Total price: $" << totalprice << endl;
+     
+     //based on condition if totalprice < $10, prints "budget meal"
+     cout << endl;
+
+     for (auto x: myMenuList){ 
+          int currentPrice;
+  
+      numbers.push_back(x.getPrice()); //puts the elements of getPrice into numbers
+
+    for (int i = 2; i < numbers[i]; i++)  {
+  // Find the min element 
+    cout << "\nLeast expensive selection in your cart costs $ "
+         << *min_element(numbers.begin() , numbers.end()); 
+  
+    // Find the max element 
+    cout << "\nMost expensive selection in your cart costs $ "
+         << *max_element(numbers.begin(), numbers.end()); 
+    
+    if (totalprice <= 10){
+      cout  <<  " !!!!! Budget meal !!!!!" << endl;
+     }
+      
+     cout << endl;
+     cout  <<  "Thank you ;) " << endl;
+    }
+     }    
+return 0;
+}
